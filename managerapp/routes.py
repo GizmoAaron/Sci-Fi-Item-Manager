@@ -1,3 +1,5 @@
+# Copyright (C) 2019 Gotanks, GizmoAaron
+
 from flask import render_template, url_for, flash, redirect, request
 from managerapp import app,db,bcrypt
 from managerapp.forms import RegistrationForm, LoginForm
@@ -25,8 +27,8 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrpyt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username = form.username.data, email = form.email.data, password = hashed_password)
+        hashed_password = bcrpyt.generate_password_hash(form.password.data).decode('utf-8') #We encryption of the password is stored once the user enters their initial password
+        user = User(username = form.username.data, email = form.email.data, password = hashed_password) #The password is then assign to the user and is then added to the database
         db.session.add(user)
         db.session.commit()
         flash(f'Account created for {form.username.data}!', 'success')
