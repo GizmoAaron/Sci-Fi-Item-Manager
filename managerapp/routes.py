@@ -2,11 +2,13 @@
 
 from flask import render_template, url_for, flash, redirect, request
 from managerapp import app,db,bcrypt
-from managerapp.forms import RegistrationForm, LoginForm
+from managerapp.forms import RegForm, LoginForm
+from managerapp.models import User
+from flask_login import login_user, current_user, logout_user, login_required
 @app.route('/')
 @app.route('/Home')
 def home():
-    return render_template('home.html', posts = posts)
+    return render_template('home.html')
 @app.route('/Login', methods=['GET','POST'])
 def login():
     if current_user.is_authenticated:
@@ -25,9 +27,9 @@ def login():
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    form = RegistrationForm()
+    form = RegForm()
     if form.validate_on_submit():
-        hashed_password = bcrpyt.generate_password_hash(form.password.data).decode('utf-8') #We encryption of the password is stored once the user enters their initial password
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') #We encryption of the password is stored once the user enters their initial password
         user = User(username = form.username.data, email = form.email.data, password = hashed_password) #The password is then assign to the user and is then added to the database
         db.session.add(user)
         db.session.commit()

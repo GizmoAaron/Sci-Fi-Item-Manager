@@ -3,7 +3,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from flaskblog.models import User
+from managerapp.models import User
 
 class RegForm(FlaskForm):#A form for users to meet all credentials when they sign up
     firstname = StringField('First Name', validators = [DataRequired(),Length(min=2,max=20)])
@@ -18,7 +18,7 @@ class RegForm(FlaskForm):#A form for users to meet all credentials when they sig
 
     email = StringField('Email',validators=[DataRequired(), Email()])
 
-    confirmemail = StringField('Confirm Email', validators = (DataRequired(), EqualTo('Email')
+    confirmemail = StringField('Confirm Email', validators = (DataRequired(), EqualTo('Email')))
 
     submit = SubmitField('Submit')
 
