@@ -1,7 +1,7 @@
 # Copyright (C) 2019 Gotanks, GizmoAaron
 
 from flask import render_template, url_for, flash, redirect, request
-from managerapp import app,db,bcrypt
+from managerapp import app, db, bcrypt
 from managerapp.forms import RegForm, LoginForm
 from managerapp.models import User
 from flask_login import login_user, current_user, logout_user, login_required

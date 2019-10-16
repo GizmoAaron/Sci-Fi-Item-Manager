@@ -34,7 +34,7 @@ class RegForm(FlaskForm):#A form for users to meet all credentials when they sig
 class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
 
-    email = StringField('Email',validators=[DataRequired(), Email()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
 
     remember = BooleanField('Remember Me')
     
